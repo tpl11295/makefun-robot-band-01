@@ -13,6 +13,10 @@ if (line.includes("\n") || line.includes("\r")) {
   throw new Error("entry must be a single line");
 }
 
+if (line !== line.trim()) {
+  throw new Error("entry must not start or end with whitespace");
+}
+
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", line, "utf8");
 if (readFileSync("/output/entry.txt", "utf8") !== line) {
